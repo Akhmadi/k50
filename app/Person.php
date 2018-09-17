@@ -73,6 +73,10 @@ class Person extends Model
         return $this->getMetaValue('email');
     }
 
+	function getPositionAttribute(){
+        return $this->getMetaValue('position');
+    }
+
 	function getPartnerUrlAttribute(){
 		return $this->getMetaValue('site_url');
 	}

@@ -68,20 +68,22 @@
                     @if(($page->code == 'team'))
                         <div class="row">
                         @foreach(data_team_members() as $item)
-                            <div class="col-xs-12 row mb-25-xs box-shadowed pad-10-xs">
-                                <div class="col-xs-12">
-                                    <p class="pt-10-xs pb-10-xs fw-700-xs fs-18-xs">{{ $item->name }}</p>
+                            <div class="col-xs-12 col-md-6 row mb-25-xs pad-10-xs">
+                                <div class="col-xs-12 col-md-4 pos-relative-xs pr-10-md center-xs row mt-20-xs mt-0-md middle-xs hidden-xs flex-md">
+                                    <img src="{{ url($item->image) }}" alt="{{ $item->name }}" class="img-responsive pos-absolute-xs" style="top: 0">
                                 </div>
 
-                                <div class="col-xs-12 col-md-9 ">
-                                    <div class="row between-xs mb-10-xs">
-                                        <p class="fw-700-xs">{{ $item->phone }}</p>
-                                        <p ><a href="mailto:{{ $item->email }}" class="link">{{ $item->email }}</a></p>
+                                <div class="col-xs-12 col-md-8 pl-10-md">
+                                    <div class="col-xs-12">
+                                        <p class="pt-10-xs pb-10-xs fw-700-xs fs-16-xs color-black">{{ mb_strtoupper( $item->name ) }}</p>
                                     </div>
-                                    <div class="ta-justify-xs ta-left-md"><img src="{{ url($item->image) }}" alt="{{ $item->name }}" class="hidden-md fl-right-xs w-30-xs ml-10-xs">{!! $item->info !!}</div>
-                                </div>
-                                <div class="col-xs-12 col-md-3 pos-relative-xs pl-10-md center-xs row mt-20-xs mt-0-md middle-xs hidden-xs flex-md">
-                                    <img src="{{ url($item->image) }}" alt="{{ $item->name }}" class="img-responsive">
+
+                                    <div class="col-xs-12 col-md-12 ">
+                                        <div class="row between-xs mb-10-xs">
+                                            <p class="fw-300-xs fs-12-xs color-black">{{ mb_strtoupper($item->position) }}</p>
+                                        </div>
+                                        <div class="ta-justify-xs ta-left-md fs-12-xs color-black"><img src="{{ url($item->image) }}" alt="{{ $item->name }}" class="hidden-md fl-left-xs w-30-xs mr-10-xs">{!! $item->info !!}</div>
+                                    </div>
                                 </div>
                             </div>
                         @endforeach
