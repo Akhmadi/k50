@@ -1,0 +1,166 @@
+.overflow-h{
+  overflow: hidden;
+}
+
+.overflow-v{
+  overflow: visible;
+}
+
+@mixin phone{
+  @content
+}
+
+@mixin tablet{
+  @media (min-width: $media-sm){ @content }
+}
+
+@mixin tablet-land{
+  @media (min-width: $media-md){ @content }
+}
+
+@mixin desktop{
+  @media (min-width: $media-lg){ @content }
+}
+
+@each $media-name, $media-size in ( xs: 0, sm: $media-sm, md: $media-md, lg: $media-lg){
+
+  @media (min-width: $media-size){
+
+    @each $vkey, $vector in (pt: padding-top, pb: padding-bottom, pr: padding-right, pl: padding-left) {
+      @for $i from 0 through 20 {
+        $size: $i * 5;
+
+        .#{$vector}-#{$size}-#{$media-name}, .#{$vkey}-#{$size}-#{$media-name} {
+          #{$vector}: #{$size}px;
+        }
+      }
+    }
+
+    @each $vkey, $vector in (left: left, right: right, none: none) {
+        .fl-#{$vkey}-#{$media-name}{
+          float: #{$vkey};
+        }
+    }
+
+    .hidden-#{$media-name} {
+      display: none;
+    }
+
+    .inline-#{$media-name} {
+      display: inline;
+    }
+
+    .inline-block-#{$media-name} {
+      display: inline;
+    }
+
+    .flex-#{$media-name} {
+      display: flex;
+    }
+
+    .block-#{$media-name} {
+      display: block;
+    }
+
+    @for $i from 0 through 20 {
+      $size: $i * 50;
+
+      .h-#{$size}px-#{$media-name}{
+        height: #{$size}px;
+      }
+    }
+
+    .h-auto-#{$media-name}{
+      height: auto;
+    }
+
+    //.h-100-#{$media-name}{
+    //  height: 100%;
+    //}
+
+    .w-auto-#{$media-name}{
+      width: auto;
+    }
+
+    //.w-100-#{$media-name}{
+    //  width: 100%;
+    //}
+
+    @for $i from 0 through 10 {
+      $size: $i * 10;
+
+      .w-#{$size}-#{$media-name}{
+        width: percentage($size/100);
+      }
+
+      .h-#{$size}-#{$media-name}{
+        height: percentage($size/100);
+      }
+    }
+
+    .img-by-h-#{$media-name}{
+      height: 100%;
+      width: auto;
+      position: absolute;
+      left: 50%;
+      top: auto;
+      transform: translateX(-50%);
+    }
+
+    .img-by-w-#{$media-name}{
+      height: auto;
+      width: 100%;
+      position: absolute;
+      left: auto;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    @each $vkey, $vector in (pad: padding, mar: margin) {
+      @for $i from 0 through 20 {
+        $size: $i * 5;
+
+        .#{$vector}-#{$size}-#{$media-name}, .#{$vkey}-#{$size}-#{$media-name}{
+          #{$vector}: #{$size}px;
+        }
+      }
+    }
+
+    @each $vector in left, right, center, justify {
+      .text-align-#{$vector}-#{$media-name}, .ta-#{$vector}-#{$media-name}{
+        text-align: #{$vector};
+      }
+    }
+
+    @each $vector in 300, 400, 500, 600, 700 {
+      .font-weight-#{$vector}-#{$media-name}, .fw-#{$vector}-#{$media-name}{
+        font-weight: #{$vector};
+      }
+    }
+
+    @each $vector in relative, absolute, fixed {
+      .position-#{$vector}-#{$media-name}, .pos-#{$vector}-#{$media-name}{
+        position: #{$vector};
+      }
+    }
+
+    @for $i from 0 through 30 {
+      $size: $i * 2;
+
+      .font-size-#{$size}-#{$media-name}, .fs-#{$size}-#{$media-name}{
+        font-size: #{$size}px;
+      }
+    }
+
+    @each $vkey, $vector in (mt: margin-top, mb: margin-bottom, mr: margin-right, ml: margin-left) {
+
+      @for $i from 0 through 20 {
+        $size: $i * 5;
+
+        .#{$vector}-#{$size}-#{$media-name}, .#{$vkey}-#{$size}-#{$media-name}{
+          #{$vector}: #{$size}px;
+        }
+      }
+    }
+  }
+}

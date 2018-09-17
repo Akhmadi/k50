@@ -1,0 +1,268 @@
+*{
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+  -webkit-margin-start: 0;
+  -webkit-margin-end: 0;
+  -webkit-padding-start: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: all 0.3s;
+}
+
+ul, menu, dir, p, blockquote {
+  margin: 0;
+}
+
+ul{
+  list-style: none;
+}
+
+html, body {
+  height: 1px;
+  min-height: 100%;
+  color: $color-white;
+  font-family: $font-brand;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+}
+
+*, *:before,
+*:after {
+  box-sizing: border-box;
+}
+
+a {
+  color: $color-gray-dark;
+  text-decoration: none;
+}
+a:hover,
+a:focus {
+  color: $color-gray-dark;
+  text-decoration: none;
+}
+
+.img-responsive {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.img-circle {
+  border-radius: 50%;
+}
+
+.br-5{
+  border-radius: 5px;
+}
+
+[role="button"] {
+  cursor: pointer;
+}
+
+body {
+  //position: relative;
+  // color: $color-gray-dark;
+  background: $color-white;
+  // font-family: $font-family-montserat;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  margin: 0;
+}
+
+input, textarea, select {
+  font-weight: 400;
+  //appearance: none;
+  outline: none;
+  border-radius: 0;
+  border: 0px none;
+  background: transparent;
+}
+
+
+
+
+@media (max-width: $media-sm - 1px) {
+  .hidden-xs {
+    display: none !important;
+  }
+}
+@media (min-width: $media-sm) and (max-width: $media-md - 1px) {
+  .hidden-sm {
+    display: none !important;
+  }
+}
+@media (min-width: $media-md) and (max-width: $media-lg - 1px) {
+  .hidden-md {
+    display: none !important;
+  }
+}
+@media (min-width: $media-lg) {
+  .hidden-lg {
+    display: none !important;
+  }
+}
+
+.inline-block{
+  display: inline-block;
+}
+
+.text__justify{
+  text-align: justify;
+}
+
+
+.text__center{
+  text-align: center;
+}
+
+.text__left{
+  text-align: left;
+}
+
+.text__right{
+  text-align: right;
+}
+
+.padded{
+  padding: 15px;
+
+  &.small{
+    padding: 5px;
+  }
+
+  &.large{
+    padding: 30px;
+  }
+}
+
+.padded-5{
+  padding: 5px;
+}
+
+.mb-5{
+  margin-bottom: 5px;
+}
+
+.ovr-h{
+  overflow: hidden;
+}
+
+.fsz-0{
+  font-size: 0;
+}
+.padded__top{
+  padding-top: 15px;
+
+  &.small{
+    padding-top: 5px;
+  }
+
+  &.large{
+    padding-top: 30px;
+  }
+}
+
+.padded__bottom{
+  padding-bottom: 15px;
+
+  &.small{
+    padding-bottom: 5px;
+  }
+
+  &.large{
+    padding-bottom: 30px;
+  }
+}
+
+.padded__right{
+  padding-right: 15px;
+
+  &.small{
+    padding-right: 5px;
+  }
+
+  &.large{
+    padding-right: 30px;
+  }
+}
+
+.padded__left{
+  padding-left: 15px;
+
+  &.small{
+    padding-left: 5px;
+  }
+
+  &.large{
+    padding-left: 30px;
+  }
+}
+
+.margined{
+  margin: 15px;
+
+  &.small{
+    margin: 5px;
+  }
+
+  &.large{
+    margin: 30px;
+  }
+}
+
+.margined__top{
+  margin-top: 15px;
+
+  &.small{
+    margin-top: 5px;
+  }
+
+  &.large{
+    margin-top: 30px;
+  }
+}
+
+.margined__bottom{
+  margin-bottom: 15px;
+
+  &.small{
+    margin-bottom: 5px;
+  }
+
+  &.large{
+    margin-bottom: 30px;
+  }
+}
+
+.margined__bottom__small{
+  margin-bottom: 5px;
+}
+
+.margined__bottom__large{
+  margin-bottom: 30px;
+}
+
+.margined__right{
+  margin-right: 15px;
+
+  &.small{
+    margin-right: 5px;
+  }
+
+  &.large{
+    margin-right: 30px;
+  }
+}
+
+.margined__left{
+  margin-left: 15px;
+
+  &.small{
+    margin-left: 5px;
+  }
+
+  &.large{
+    margin-left: 30px;
+  }
+}

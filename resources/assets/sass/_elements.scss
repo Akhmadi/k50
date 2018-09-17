@@ -1,0 +1,165 @@
+.colors__fb{
+  background-color: #3b5998;;
+  color: #fff;
+}
+
+.colors__vk{
+  background-color: #597ba0;
+  color: #fff;
+}
+
+.colors__gplus{
+  background-color: #fff;
+  color: #d9534f;
+}
+
+.form-row{
+  padding-bottom: 30px;
+
+  help-block{
+    color: red;
+  }
+}
+
+.modal__alert__overlay{
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom:0;
+  top: 0;
+  background-color: rgba(0,0,0,0.8);
+  text-align: center;
+}
+
+.modal__alert__overlay:before{
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
+  content: "";
+}
+
+.modal__alert{
+  min-width: 300px;
+  max-width: 100%;
+  padding: 5px;
+  display: inline-block;
+  vertical-align: middle;
+
+  background-color: white;
+
+  text-align: left;
+}
+
+.bordered{
+  border: 1px solid $color-border;
+}
+
+.bordered__left{
+  border-left: 1px solid $color-border;
+}
+
+.bordered__right{
+  border-right: 1px solid $color-border;
+}
+
+.bordered__top{
+  border-top: 1px solid $color-border;
+}
+
+.bordered__bottom{
+  border-bottom: 1px solid $color-border;
+}
+
+
+
+.vertical-middle{
+  vertical-align: middle;
+}
+
+.vertical-top{
+  vertical-align: top;
+}
+
+.vertical-bottom{
+  vertical-align: bottom;
+}
+
+
+/**************************** tabs ****************************/
+
+.tabs__wrapper {
+  & > .tabs__content {
+    & > .tab{
+      display: none;
+
+      &.is__active{
+
+        display:block;
+      }
+    }
+  }
+}
+
+/**************************** rating **************************/
+
+.rating__wrapper {
+
+  &.is__active >i {
+    cursor: pointer;
+  }
+
+  i:before{
+    opacity: 0.4;
+    margin: 0;
+  }
+
+  &.is-1 > i:nth-child(-n+1):before,
+  &.is-2 > i:nth-child(-n+2):before,
+  &.is-3 > i:nth-child(-n+3):before,
+  &.is-4 > i:nth-child(-n+4):before,
+  &.is-5 > i:nth-child(-n+5):before{
+      opacity: 1;
+  }
+}
+
+.dropdown__wrapper {
+
+  .dropdown{
+    display: none;
+  }
+}
+
+
+.gallery {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.gallery__item {
+  flex: 0 0 auto;
+  height: 300px;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 5px;
+
+  img{
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
+
+//.gallery__item {
+//  &:nth-child(4n+1){
+//    width: 250px;
+//  }
+//  &:nth-child(4n+2){
+//    width: 325px;
+//  }
+//  &:nth-child(4n+3){
+//    width: 180px;
+//  }
+//  &:nth-child(4n+4){
+//    width: 380px;
+//  }
+//}
