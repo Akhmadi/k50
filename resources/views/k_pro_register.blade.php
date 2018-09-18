@@ -36,6 +36,9 @@
                     <p class="quote__text">Регистрация на программу закрыта</p>
                 @endif
             </div>
+            <div class="info pad-5-xs pad-0-md">
+                <h6 class="color_orange font_semibold font_s16">* Все поля обязательны к заполнению (кроме сертификатов)</h6>
+            </div>
             <form enctype="multipart/form-data" method="post" action="{{ url( route('forms.students.register')) }}" class="form" >
                 {{ csrf_field() }}
                 <div class="control__group {{ $errors->has('lastname') ? ' has-error' : '' }} row middle-md">
@@ -76,7 +79,7 @@
 
                         <select required name="b_year" value="{{ old('b_year') }}" class="form__control col-xs">
                             <option value="" ></option>
-                            @foreach(range(Carbon\Carbon::now()->year - 50,Carbon\Carbon::now()->year, 1) as $year)
+                            @foreach(range(Carbon\Carbon::now()->year - 90,Carbon\Carbon::now()->year, 1) as $year)
                                 <option value="{{ $year }}">{{ $year }}</option>
                             @endforeach
                         </select>
@@ -115,6 +118,20 @@
                         <span class="error col-xs-12 col-md-3">Поле необходимо заполнить</span>
                     @endif
                 </div>
+                <div class="row middle-md control__group{{ $errors->has('f10') ? ' has-error' : '' }}">
+                    <span class="col-xs-12 col-md-3">Место работы/учебы</span>
+                    <textarea class="form__control col-xs-12 col-md-4" cols="30" rows="10"  name="f10">{{ old('f10') }}</textarea>
+                    @if($errors->has('f10'))
+                        <span class="error col-xs-12 col-md-3">Поле необходимо заполнить</span>
+                    @endif
+                </div>
+                <div class="row middle-md control__group{{ $errors->has('f11') ? ' has-error' : '' }}">
+                    <span class="col-xs-12 col-md-3">Должность/Специальность</span>
+                    <textarea class="form__control col-xs-12 col-md-4" cols="30" rows="10"  name="f11">{{ old('f11') }}</textarea>
+                    @if($errors->has('f11'))
+                        <span class="error col-xs-12 col-md-3">Поле необходимо заполнить</span>
+                    @endif
+                </div>                          
                 <div class="row middle-md control__group{{ $errors->has('f1') ? ' has-error' : '' }}">
                     <span class="col-xs-12 col-md-3">Уровень знания английского языка</span>
                     <select  name="f1" value="{{ old('f1') }}" class="form__control col-xs-12 col-md-4">
@@ -182,30 +199,27 @@
                         <span class="error col-xs-12 col-md-3">Поле необходимо заполнить</span>
                     @endif
                 </div>
-                <div class="row middle-md control__group{{ $errors->has('f10') ? ' has-error' : '' }}">
-                    <span class="col-xs-12 col-md-3">ВУЗ/Место работы</span>
-                    <textarea class="form__control col-xs-12 col-md-4" cols="30" rows="10"  name="f10">{{ old('f10') }}</textarea>
-                    {{--@if($errors->has('f10'))--}}
-                        {{--<span class="error col-xs-12 col-md-3">Поле необходимо заполнить</span>--}}
-                    {{--@endif--}}
-                </div>
 
                 <div class="row middle-md control__group">
-                    <span class="col-xs-12 col-md-3">Файл №1</span>
+                    <span class="col-xs-12 col-md-3">Резюме</span>
                     <input type="file" name="file1" class="form__control col-xs-12 col-md-4" required>
                 </div>
                 <div class="row middle-md control__group">
-                    <span class="col-xs-12 col-md-3">Файл №2</span>
+                    <span class="col-xs-12 col-md-3">Эссе1</span>
                     <input type="file" name="file2" class="form__control col-xs-12 col-md-4" required>
                 </div>
                 <div class="row middle-md control__group">
-                    <span class="col-xs-12 col-md-3">Файл №3</span>
-                    <input type="file" name="file3" class="form__control col-xs-12 col-md-4">
+                    <span class="col-xs-12 col-md-3">Эссе2</span>
+                    <input type="file" name="file3" class="form__control col-xs-12 col-md-4" required>
                 </div>
                 <div class="row middle-md control__group">
-                    <span class="col-xs-12 col-md-3">Файл №4</span>
-                    <input type="file" name="file4" class="form__control col-xs-12 col-md-4">
-                </div>
+                    <span class="col-xs-12 col-md-3">Рекомендательное письмо</span>
+                    <input type="file" name="file4" class="form__control col-xs-12 col-md-4" required>
+                </div>                
+                <div class="row middle-md control__group">
+                    <span class="col-xs-12 col-md-3">Сертификаты (одним файлом)</span>
+                    <input type="file" name="file5" class="form__control col-xs-12 col-md-4">
+                </div>                
                 <div class="row center-xs control__group">
                     <input type="submit" class="btn is__red is__rounded margined__bottom margined__top col-xs-12 col-sm-4 col-md-3" value="Отправить анкету">
                 </div>

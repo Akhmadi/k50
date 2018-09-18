@@ -86,7 +86,9 @@ class ApiController extends Controller
 		    'f6' => 'required',
 		    'f7' => 'required',
 		    'f8' => 'required',
-		    'f9' => 'required'
+			'f9' => 'required',
+			'f10' => 'required',
+			'f11' => 'required'
 	    ];
 
     	$validator = Validator::make( $request->only(array_keys($validationRules)) , $validationRules);
@@ -141,7 +143,8 @@ class ApiController extends Controller
 	    $user['meta->f7'] = $request->get('f7');
 	    $user['meta->f8'] = $request->get('f8');
 	    $user['meta->f9'] = $request->get('f9');
-        $user['meta->f10'] = $request->get('f10');
+		$user['meta->f10'] = $request->get('f10');
+		$user['meta->f11'] = $request->get('f11');
 	    $user['password'] = bcrypt('1234567890');
 	    $user['status'] = 'disabled';
 
