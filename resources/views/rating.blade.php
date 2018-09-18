@@ -27,12 +27,12 @@
                 </div>
                 <div class="row center-xs">
                     @foreach($post->ratingPersons as $ratingPerson)
-                        <div class="col-xs-12 col-md-1-5 pad-5-xs col">
-                            <div class="card-image h-300px-xs pos-relative-xs overflow-h">
+                        <div class="pad-5-xs col frame-border mar-5-xs">
+                            <div class="card-image h-250px-xs pos-relative-xs overflow-h">
                                 <img src="{{ url($ratingPerson->image) }}" alt="{{ $ratingPerson->name }}" class="img-by-h-xs">
                             </div>
-                            <p class="fs-18-xs fw-700-xs pb-5-xs pt-5-xs col-xs">{{ $ratingPerson->name }}</p>
-                            <p class="fs-16-xs ta-l-xs">{{ $ratingPerson->descriptionPivot }}</p>
+                            <p class="fs-14-xs fw-700-xs pb-5-xs pt-5-xs col-xs color-black">{{ $ratingPerson->name }}</p>
+                            <p class="fs-12-xs ta-l-xs color-black fw-600-xs">{{ $ratingPerson->descriptionPivot }}</p>
                         </div>
                         {{--<div class="person mb-20-xs mb-0-md">--}}
                             {{--<div class="image__wrapper">--}}
