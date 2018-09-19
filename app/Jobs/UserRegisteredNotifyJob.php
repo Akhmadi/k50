@@ -38,7 +38,7 @@ class UserRegisteredNotifyJob implements ShouldQueue
 
         Mail::to($this->user->email)->send( new HelloUser($this->user));
 
-        Mail::to(env('MAIL_USER_NOTIFY_TO', 'shapovalov.v@gmail.com'))->send( new UserRegistered($this->user));
+        Mail::to(env('MAIL_USER_NOTIFY_TO'))->send( new UserRegistered($this->user));
 
     }
 }

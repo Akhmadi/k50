@@ -102,6 +102,7 @@
                         <span class="tab btn is__rounded is__active_red col-xs-12 mb-30-md large has__icon" data-tab-id="2"><img src="{{ url('/images/file.png') }}" alt="">Презентации</span>
                         <span class="tab btn is__rounded is__active_red col-xs-12 mb-30-md large has__icon" data-tab-id="3"><img src="{{ url('/images/microphone.png') }}" alt="">Спикеры</span>
                         <span class="tab btn is__rounded is__active_red col-xs-12 mb-30-md large has__icon" data-tab-id="5"><img src="{{ url('/images/clipboard.png') }}" alt="">Задания для студента</span>
+                        <span class="tab btn is__rounded is__active_red col-xs-12 mb-30-md large has__icon" data-tab-id="7"><img src="{{ url('/images/rules.png') }}" alt="">Правила</span>
                         <span class="tab btn is__rounded is__active_red col-xs-12 has__icon" data-tab-id="6"><img src="{{ url('/images/social.png') }}" alt="">Личные данные</span>
                     </div>
                     <div class="tab__content  col-xs-12 col-md-8">
@@ -233,6 +234,16 @@
                             </div>
 
                         </div>
+                        <div class="tab" data-tab-id="7">
+                            @if($kpro)
+                            <div class="quote">
+                                <p class="quote__text">Правила участия в программе К-Про</p>
+                            </div>
+                            <div class="base__content body pl-5-xs pl-0-md pr-5-xs pr-0-md">
+                                {!! $kpro ? $kpro->excerpt : '' !!}
+                            </div>
+                            @endif
+                        </div>                       
                         <div class="tab" data-tab-id="6">
                             <div class="quote text__center quote_paddingless">
                                 <div class="quote__text quote__text_black">Для изменения контактных данных необходимо обратиться в офис компании</div>

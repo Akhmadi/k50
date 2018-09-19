@@ -12,6 +12,10 @@
 <p>{{ $user->getMetaValue('phone_home') }}</p><br>
 <p><b>Тел.мобильный</b></p>
 <p>{{ $user->getMetaValue('phone_mobile') }}</p><br>
+<p><b>Место работы/учебы</b></p>
+<p>{{ $user->getMetaValue('f10') }}</p><br>
+<p><b>Должность/Специальность</b></p>
+<p>{{ $user->getMetaValue('f11') }}</p><br>
 <p><b>Уровень знания английского языка</b></p>
 <p>{{ $user->getMetaValue('f1') }}</p><br>
 <p><b>Наличие сертификатов по профессиональному обучению, повышению квалификации и пр.</b></p>
@@ -30,8 +34,6 @@
 <p>{{ $user->getMetaValue('f8') }}</p><br>
 <p><b>У Вас есть достижения в спорте, творчестве и других сферах жизни?</b></p>
 <p>{{ $user->getMetaValue('f9') }}</p><br>
-<p><b>ВУЗ/Место работы</b></p>
-<p>{{ $user->getMetaValue('f10') }}</p><br>
 
 
 

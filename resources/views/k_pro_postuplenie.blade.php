@@ -40,18 +40,19 @@
             </div>
         </div>
 
+        @if($kproOpened)
+        <div class="row col-xs-12 center-xs mb-20-xs mb-0-md mt-10-xs">
+            <a href="{{ \App\PagesService::pageRoute('kpro_register') }}"
+            class="btn is__red width_400px is__rounded ml-30-md">Подать заявку</a>
+        </div>
+        @endif
+
         <div class="container">
             <div class="block_content">
                 <div class="base__content margined__bottom pad-5-xs pad-0-md">
                     {!! $page->body !!}
                 </div>
             </div>
-            @if($kproOpened)
-            <div class="row center-xs">
-                <a href="{{ \App\PagesService::pageRoute('kpro_register') }}"
-                   class="btn is__red_outlined width_240px is__rounded ml-30-md">Подать заявку</a>
-            </div>
-            @endif
         </div>
     </div>
 
