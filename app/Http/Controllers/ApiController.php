@@ -147,10 +147,30 @@ class ApiController extends Controller
 		$user['meta->f11'] = $request->get('f11');
 	    $user['password'] = bcrypt('1234567890');
 	    $user['status'] = 'disabled';
-
-        foreach ($request->allFiles() as $file){
-
-            $newfileName = $user['name'].'_'.$file->getClientOriginalName();
+		
+		foreach ($request->allFiles() as $fname => $file){
+			
+			$filext = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+			switch($fname){
+				case "file1":
+					$docname = "Резюме.".$filext;
+					break;
+				case "file2":
+					$docname = "Эссе1.".$filext;
+					break;
+				case "file3":
+					$docname = "Эссе2.".$filext;
+					break;
+				case "file4":
+					$docname = "Рекомендательное_письмо.".$filext;
+					break;					
+				case "file5":
+					$docname = "Сертификаты.".$filext;
+					break;					
+				default:
+					$docname = $file->getClientOriginalName();
+			}
+			$newfileName = $user['name'].'_'.$docname;
 
             $files[] = 'uploads/Анкеты студентов/' . $newfileName;
 

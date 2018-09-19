@@ -39,7 +39,7 @@
             <div class="info pad-5-xs pad-0-md">
                 <h6 class="color_orange font_semibold font_s16">* Все поля обязательны к заполнению (кроме сертификатов)</h6>
             </div>
-            <form enctype="multipart/form-data" method="post" action="{{ url( route('forms.students.register')) }}" class="form" >
+            <form enctype="multipart/form-data" method="post" action="{{ url( route('forms.students.register')) }}" class="form">
                 {{ csrf_field() }}
                 <div class="control__group {{ $errors->has('lastname') ? ' has-error' : '' }} row middle-md">
                     <span class="col-xs-12 col-md-3">Фамилия</span>
@@ -220,9 +220,15 @@
                     <span class="col-xs-12 col-md-3">Сертификаты (одним файлом)</span>
                     <input type="file" name="file5" class="form__control col-xs-12 col-md-4">
                 </div>                
+                
+                
                 <div class="row center-xs control__group">
-                    <input type="submit" class="btn is__red is__rounded margined__bottom margined__top col-xs-12 col-sm-4 col-md-3" value="Отправить анкету">
+                    <input id="btn_stdt_form" type="submit" class="btn is__rounded margined__bottom margined__top col-xs-12 col-sm-4 col-md-3" value="Отправить анкету" disabled>
                 </div>
+                <div class="row center-xs color_orange font_semibold font_s16">      
+                    <input type="checkbox" class="checkbox" name="checkbox" id="confirm" required/>    
+                    <label for="confirm">С правилами обучения ознакомлен</label>                    
+                </div>                
 
                 <div class="info pad-5-xs pad-0-md">
                     <h5 class="color_orange font_semibold font_s16">Правила обучения</h5>

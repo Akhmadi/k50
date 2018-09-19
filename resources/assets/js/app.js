@@ -204,9 +204,23 @@ utils.onReady(()=>{
                 }
             });
         });
-
-
     }
-
+    
+    if (document.querySelector('.checkbox')){
+       
+        let checker = document.getElementById('confirm');
+        let sendbtn = document.getElementById('btn_stdt_form');
+        checker.onchange = function() {
+            if (this.checked){
+                sendbtn.classList.add('is__red');
+                sendbtn.disabled = false;
+            }
+            else {
+                sendbtn.classList.remove('is__red');
+                sendbtn.disabled = true;
+            }
+            
+        };
+    };
 
 });
