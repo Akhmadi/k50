@@ -161,6 +161,10 @@
           #{$vector}: #{$size}px;
         }
       }
+
+      .#{$vkey}-auto-#{$media-name}{
+        #{$vector}: auto;
+      }
     }
   }
 }

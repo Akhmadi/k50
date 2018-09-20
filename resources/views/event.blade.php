@@ -177,25 +177,37 @@
                                             <div class="tab" data-tab-id="4">
                                                 <div class="speakers">
                                                     @foreach($post->forumSpeakers->chunk(3) as $chunk)
-                                                        <div class="row">
+                                                        <div class="row mb-20-xs">
                                                             @foreach($chunk as $speaker)
                                                                 <div class="col-xs-12 col-md-4 col speaker">
-                                                                    <div class="pos-relative-xs h-350px-md h-auto-xs ta-center-xs">
-                                                                        <img src="{{ $speaker->image ? url($speaker->image) : '' }}" alt="{{ $speaker->name }}" class="inline-block-xs w-100-xs">
-                                                                        <div class="bio hidden-xs flex-md row col end-xs">
-                                                                            <p class="fs-12-xs pad-5-xs ta-justify-xs">{{ $speaker->info}}</p>
+                                                                    <div class="row pos-relative-xs h-auto-xs frame-border hidden-xs flex-md">
+                                                                        <div class="col-md-6 pos-relative-xs h-150px-xs center-xs mt-10-xs mt-5-sm mb-5-sm ">
+                                                                            <img src="{{ $speaker->image ? url($speaker->image) : '' }}" alt="{{ $speaker->name }}" class="img-by-h-xs pos-absolute-xs">
+                                                                        </div>    
+                                                                        <div class="col-md-6 info mt-5-sm">
+                                                                            <p class="fw-700-xs fs-12-xs color-black">{{ $speaker->name}}</p>
+                                                                            <p class="fw-300-xs fs-12-xs color-black mt-20-xs">{{ $speaker->position}}</p>
+                                                                        </div>
+                                                                        <div class="bio col-xs-12">
+                                                                            <p class=" fs-12-xs pad-5-xs ">{{ $speaker->info}}</p>
                                                                             @if($speaker->press)
                                                                                 <div class="ta-center-xs presentation-button">
                                                                                     <a href="{{ url($speaker->press) }}" target="_blank" class="link">Скачать презентацию</a>
                                                                                 </div>
                                                                             @endif
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="info">
-                                                                        <p class="subject pl-5-xs">{{ $speaker->subject}}</p>
-                                                                        <p class="name fw-700-xs pl-5-xs">{{ $speaker->name}}</p>
+                                                                    </div>    
+                                                                                                                                    
+                                                                    <div class="info hidden-md flex-xs row">
+                                                                        <div class="col-xs-12 mt-10-xs">
+                                                                            <img src="{{ $speaker->image ? url($speaker->image) : '' }}" alt="{{ $speaker->name }}" class="inline-block-xs w-50-xs block-xs ml-auto-xs mr-auto-xs">
+                                                                            <p class="fw-700-xs fs-14-xs pl-5-xs color-black ta-center-xs">{{ $speaker->name}}</p>
+                                                                        </div>
+                                                                        <div class="col-xs-12">
+                                                                            <p class="fw-300-xs fs-12-xs pl-5-xs color-black ta-center-xs">{{ $speaker->position}}</p>
+                                                                        </div>
                                                                         <div class="hidden-md">
-                                                                            <p class="fs-12-xs pad-5-xs ta-justify-xs">{{ $speaker->info}}</p>
+                                                                            <p class="fs-12-xs pad-5-xs ta-justify-xs color-black">{{ $speaker->info}}</p>
                                                                             @if($speaker->press)
                                                                                 <div class="ta-center-xs presentation-button">
                                                                                     <a href="{{ url($speaker->press) }}" target="_blank" class="link">Скачать презентацию</a>
