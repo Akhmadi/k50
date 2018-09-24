@@ -8,13 +8,14 @@
 require('./bootstrap');
 import utils from './utils';
 import PageApp from './components/page-app';
+import VueTheMask from 'vue-the-mask';
 window.smoothScroll = require( 'smoothscroll' );
 
 window.videojs = require('video.js');
 window.Vue = require('vue');
 
 window.Masonry = require('masonry-layout');
-
+Vue.use(VueTheMask);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -222,5 +223,6 @@ utils.onReady(()=>{
             
         };
     };
+
 
 });

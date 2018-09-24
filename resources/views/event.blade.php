@@ -15,12 +15,14 @@
             $lng = $coords[1];
         }
 
-        if ($action == 'register'){
+        /* if ($action == 'register'){
             $eventFormScript = prepareFormScript($post->eventMemberForm, 'bform');
-        }
+        */
         if ($action == 'registermedia'){
             $eventFormScript = prepareFormScript($post->eventMediaForm, 'bform');
         }
+
+        $regUsers = \App\RegEventUser::all();
 
         $eventPhotos = crud_image($post->eventPhotos, true);
         $eventPhotoCount = count($eventPhotos);
@@ -90,7 +92,10 @@
                                 </div>
 
                                 @if($action == 'register' || $action == 'registermedia')
-                                    <div id="bform" class=""></div>
+                                    <div class='row col-xs-12'>
+                                        @include('event_form_registration')
+                                    </div>                                    
+
                                     <div class="ta-center-xs pad-20-xs">
                                         <a href="{{ url()->current() }}" class="btn is__red is__margined">Назад к событию</a>
                                     </div>

@@ -1436,6 +1436,57 @@ textarea.form__control{
     }
   }
 
+  .form_event{
+    display: inline-block;
+    padding: 25px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 500px;
+
+    .form__field {
+      margin-bottom: 10px;
+    }
+
+    .form__error {
+      color: red;
+      text-align: left;
+      font-size: 12px;
+      display: block;
+      margin-top: 3px;
+      display: none;
+    }
+
+    input {
+      outline: none;
+      display: block;
+      width: 100%;
+      border-radius: 2px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      box-sizing: border-box;
+
+      &:valid:not(:placeholder-shown) {
+        border-color: green;
+      }
+      
+      &:invalid:not(:placeholder-shown) {
+        border-color: red;
+      }
+      &:invalid:not(:placeholder-shown) + .form__error {
+        display: block;
+      }
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      border-radius: 2px;
+      border: 0;
+      background-color: #ccc;
+      color: #fff;
+    }
+  }
+
   .event__member__form{
     position: fixed;
     bottom: 0;

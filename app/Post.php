@@ -69,6 +69,11 @@ class Post extends Model
 		return $this->belongsToMany(User::class, 'posts_users', 'post_id', 'user_id')->withPivot(['type', 'status'])->wherePivot('type', '=', 'student');
 	}
 
+	function registeredUsers(){
+		return $this->belongsToMany(RegEventUser::class, 'reg_event_link_data', 'post_id', 'user_id')
+					->withPivot(['meta']);
+	}
+
 	/********************************** scopes *******************************/
 
     function scopeOnlyEnabled($q){
