@@ -25,7 +25,16 @@ export default {
             email: null,
             subject: null,
             text: null
-        }
+        },
+        userSobytiyaRegister:{
+            first_name: null,
+            last_name: null,
+            phone: null,
+            email: null,
+            company: null,
+            position: null
+        },
+        userSobytiyaFound: false
     },
     computed:{
         searchGroups(){
@@ -122,9 +131,9 @@ export default {
             let message = { text: messageText, tmr: null, visible: true, id: Math.random() };
             this.messages.push( message );
 
-            // message.tmr = setTimeout(()=>{
-            //     this.deleteMessage(message);
-            // }, 3000);
+            message.tmr = setTimeout(()=>{
+                this.deleteMessage(message);
+            }, 10000);
         },
         // sendStudentRegistrationForm(){
         //     let fd  = new FormData();
@@ -169,6 +178,30 @@ export default {
                     console.log('search error:', err);
             });
 
+        },
+
+        searchByPhone(){
+            axios.post('/api/search-by-phone', {
+                searchPhone: document.querySelector('.maskPhone').value
+              })
+              .then((response)=>{
+                this.userSobytiyaFound = true;
+                if (response.data.length == 0){
+                    this.showMessage('Ваши данные не найдены. Пожалуйста, заполните форму регистрации.');                      
+                }
+                else{
+                    this.userSobytiyaRegister.first_name = response.data.first_name;
+                    this.userSobytiyaRegister.last_name = response.data.last_name;
+                    this.userSobytiyaRegister.phone = response.data.phone;
+                    this.userSobytiyaRegister.email = response.data.email;
+                    this.userSobytiyaRegister.company = response.data.company;
+                    this.userSobytiyaRegister.position = response.data.position;
+                    this.showMessage('Добрый день, ' + this.userSobytiyaRegister.last_name + ' ' +  this.userSobytiyaRegister.first_name + '. Будем рады видеть Вас на нашем форуме');
+                }
+              })
+              .catch((error)=>{
+                console.log('search error:', err);
+              }); 
         },
         // toggleStudentForm(){
         //     this.studentRegisterForm.state = this.studentRegisterForm.state === 'hidden' ? 'visible' : 'hidden';

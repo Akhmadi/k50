@@ -12,6 +12,7 @@ use App\PagesService;
 use App\Post;
 use App\Subscriber;
 use App\User;
+use App\RegEventUser;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -65,7 +66,12 @@ class ApiController extends Controller
 
             FeedbackQuestion::create($requestParams);
         }
-    }
+	}
+	
+	function postSobytiyaSearchPhone(Request $request){
+		$regEventUser = RegEventUser::where('phone', $request->get('searchPhone',''))->first();
+		return isset($regEventUser) ? $regEventUser : [];
+	}
 
     function postStudentRegister(Request $request){
     	$validationRules = [

@@ -24,6 +24,8 @@ Route::group(['as' => 'api.'], function(){
 	Route::get('/api/search/{text}/{take?}/{offset?}', ['as'=>'search', 'uses' => 'ApiController@getSearch']);
 	Route::get('/api/opcache/reset', ['as'=>'reset', 'uses' => 'ApiController@getOPcacheReset']);
 	Route::get('/api/students/', ['as'=>'students', 'uses' => 'ApiController@getStudents']);
+
+	Route::post('/api/search-by-phone/', ['as'=>'searchPhone', 'uses' => 'ApiController@postSobytiyaSearchPhone']);	
     Route::post('/api/subscribe/', ['as'=>'subscribe', 'uses' => 'ApiController@postSubscribe']);
     Route::post('/api/feedback/', ['as'=>'feedback', 'uses' => 'ApiController@postFeedback']);
 	Route::post('/api/students/approve', ['as'=>'students', 'uses' => 'ApiController@postStudentsApprove']);
