@@ -5402,6 +5402,10 @@ input, textarea, select {
   color: #fff;
 }
 
+.color_red {
+  color: #bf5329;
+}
+
 .color_orange {
   color: #f05033;
 }
@@ -6763,6 +6767,109 @@ textarea.form__control {
   .event__post__section .tabs .tab__header .tab:first-child {
     margin-left: 0;
   }
+}
+
+.event__post__section .form_reg_event {
+  border: 1px solid #e0eded;
+  background: #fff;
+  position: relative;
+  margin: 0 0 6px 0;
+  border-radius: 2px;
+  -webkit-transition: all .3s linear;
+  transition: all .3s linear;
+  cursor: default;
+  z-index: 1;
+}
+
+.event__post__section .form_reg_event .header__container {
+  border-bottom: 1px solid #e0eded;
+  border-radius: 2px 2px 0 0;
+  background: #fcfcfc;
+  word-wrap: break-word;
+  overflow-x: hidden;
+}
+
+.event__post__section .form_reg_event .header__container .header {
+  padding: 0 !important;
+  text-transform: none;
+  text-align: center;
+}
+
+.event__post__section .form_reg_event .form__body {
+  padding: 15px 20px;
+}
+
+.event__post__section .form_reg_event .form__body fieldset {
+  display: block;
+  padding: 15px 0;
+  border: 0;
+  background: transparent;
+  max-height: 50000px;
+  -webkit-transition: max-height .5s ease-in-out;
+  transition: max-height .5s ease-in-out;
+  overflow: hidden;
+}
+
+.event__post__section .form_reg_event .form__body fieldset .form__label {
+  position: relative;
+  display: block;
+  padding: 0;
+  margin-bottom: 6px;
+  line-height: 19px;
+  border-radius: 0;
+  font: normal 100% "PT Sans",sans-serif;
+  color: #333;
+  text-align: left;
+  white-space: normal;
+}
+
+.event__post__section .form_reg_event .form__body fieldset .form__label:after {
+  content: "\F069";
+  position: absolute;
+  margin: 0 0 0 2px;
+  color: #f11a48;
+  font: normal 8px 'FontAwesome';
+}
+
+.event__post__section .form_reg_event .form__body fieldset input {
+  display: block;
+  width: 100%;
+  height: 40px;
+  padding: 8px 46px 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  background: #f9f9f9;
+  -webkit-appearance: normal;
+     -moz-appearance: normal;
+          appearance: normal;
+  outline: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-transition: border-color ease-in-out .5s;
+  transition: border-color ease-in-out .5s;
+}
+
+.event__post__section .form_reg_event .form__body fieldset .findPhone {
+  height: 100%;
+  line-height: 40px;
+  width: 90%;
+}
+
+.event__post__section .form_reg_event .form__body fieldset .form__field .icon {
+  position: absolute;
+  width: 5%;
+  height: 29px;
+  line-height: 29px;
+  font-size: 15px;
+  color: #ccc;
+  text-align: center;
+  right: 30px;
+  padding: 0 0 0 3px;
+  border-left: 1px solid;
+}
+
+.event__post__section .form_reg_event .fieldset__footer {
+  border: none;
 }
 
 .event__post__section .form_event {

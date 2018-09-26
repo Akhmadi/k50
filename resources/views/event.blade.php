@@ -19,6 +19,8 @@
             $eventFormScript = prepareFormScript($post->eventMediaForm, 'bform');
         }
 
+        $eventOpened = $post->sobytiyaRegisterOpened;
+
         $regUsers = \App\RegEventUser::all();
 
         $eventPhotos = crud_image($post->eventPhotos, true);
@@ -89,10 +91,10 @@
                                 </div>
 
                                 @if($action == 'register')
-                                    <div class='row col-xs-12'>
+                                    <div class='row'>
                                         @include('event_form_registration')
                                     </div>                                    
-
+                                    
                                     <div class="ta-center-xs pad-20-xs">
                                         <a href="{{ url()->current() }}" class="btn is__red is__margined">Назад к событию</a>
                                     </div>
@@ -110,7 +112,7 @@
                                             <p><b>Место: </b>{{ $post->eventPlace }}</p>
                                         </div>
                                         <div class="col-xs-12 col-md-4 center-xs end-md  pad-5-xs pad-0-md">
-                                            @if($post->eventRegistrationStatus == 'ENABLED')
+                                            @if($eventOpened)
                                                 <a href="{{ url()->current() .'?'. http_build_query(['action' => 'register']) }}" v-on:click="userSobytiyaFound=false" class="btn is__red is__margined">Стать участником</a>
                                             @else
                                                 <p>Регистрация закрыта</p>

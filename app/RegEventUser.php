@@ -8,8 +8,10 @@ class RegEventUser extends Model
 {
     //
     protected $table='reg_event_users';
+    protected $guarded = array('id');
 
     public function posts(){
-        $this->belongsToMany(Post::class, 'reg_event_link_data', 'user_id', 'post_id');
+        return $this->belongsToMany(Post::class, 'reg_event_link_data', 'user_id', 'post_id')
+            ->withPivot(['meta']);
     }
 }

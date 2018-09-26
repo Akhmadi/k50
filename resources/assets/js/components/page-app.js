@@ -34,7 +34,9 @@ export default {
             company: null,
             position: null
         },
-        userSobytiyaFound: false
+        userSobytiyaFound: {
+            isVisible: false
+        }
     },
     computed:{
         searchGroups(){
@@ -169,6 +171,9 @@ export default {
         toggleMenuWrapper(){
             this.menuWrapper.isVisible = !this.menuWrapper.isVisible;
         },
+       toggleuserSobytiyaFound(){
+           this.userSobytiyaFound.isVisible = !this.userSobytiyaFound.isVisible;
+       } ,
 
         doSearch(){
             axios.get( baseUrl + '/api/search/' + this.search.value)
@@ -185,7 +190,7 @@ export default {
                 searchPhone: document.querySelector('.maskPhone').value
               })
               .then((response)=>{
-                this.userSobytiyaFound = true;
+                this.userSobytiyaFound.isVisible = true;
                 if (response.data.length == 0){
                     this.showMessage('Ваши данные не найдены. Пожалуйста, заполните форму регистрации.');                      
                 }

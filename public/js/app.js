@@ -31816,7 +31816,9 @@ if (token) {
             company: null,
             position: null
         },
-        userSobytiyaFound: false
+        userSobytiyaFound: {
+            isVisible: false
+        }
     },
     computed: {
         searchGroups: function searchGroups() {
@@ -31944,6 +31946,9 @@ if (token) {
         toggleMenuWrapper: function toggleMenuWrapper() {
             this.menuWrapper.isVisible = !this.menuWrapper.isVisible;
         },
+        toggleuserSobytiyaFound: function toggleuserSobytiyaFound() {
+            this.userSobytiyaFound.isVisible = !this.userSobytiyaFound.isVisible;
+        },
         doSearch: function doSearch() {
             var _this5 = this;
 
@@ -31959,7 +31964,7 @@ if (token) {
             axios.post('/api/search-by-phone', {
                 searchPhone: document.querySelector('.maskPhone').value
             }).then(function (response) {
-                _this6.userSobytiyaFound = true;
+                _this6.userSobytiyaFound.isVisible = true;
                 if (response.data.length == 0) {
                     _this6.showMessage('Ваши данные не найдены. Пожалуйста, заполните форму регистрации.');
                 } else {

@@ -276,7 +276,31 @@ class Post extends Model
         } else {
             return false;
         }
-    }
+	}
+	
+	function getSobytiyaRegisterOpenedAttribute(){
+		$eventReg = $this->getMetaValue('event.registration');
+		$eventDate = new Carbon($this->getMetaValue('event.date'));
+		$dayBefore = $this->getMetaValue('event.days_before_start');
+		$maxUsers = $this->getMetaValue('event.max_memebrs_count');
+		$cntUsers = $this->registeredUsers()->count();
+		
+
+		if ($eventReg != 'ENABLED'){
+			return false;
+		} else {
+			if (Carbon::now()->lte($eventDate->subDays($dayBefore))){
+				if ($cntUsers < ($maxUsers)){
+					return true;
+				} else {
+					return false;
+				}				
+			} else {
+				return false;
+			}
+			
+		}
+	}
 
 	function getUrlAttribute(){
 		if (($this->postType->code != PostType::POST_TYPE_REVIEW) && ($this->postType->code != PostType::POST_TYPE_RESEARCH) && $this->slug){

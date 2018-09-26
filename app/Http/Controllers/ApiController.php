@@ -73,6 +73,48 @@ class ApiController extends Controller
 		return isset($regEventUser) ? $regEventUser : [];
 	}
 
+	function postSobytiyaRegister(Request $request){
+		$validationRules = [
+			'phone' => 'required',
+		    'lastName' => 'required|max:191',			
+			'firstName' => 'required|max:191',
+			'email' => 'required|email',
+		    'company' => 'required',
+			'position' => 'required',
+			'parentUrl' => 'required',
+			'eventId' => 'required'
+		];
+
+		$validator = Validator::make( $request->only(array_keys($validationRules)) , $validationRules);
+
+		if ($validator->fails()){
+            session()->push('messages', 'Необходимо заполнить все поля анкеты!');
+			return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
+		}		
+
+
+		$user = RegEventUser::updateOrCreate([
+			'phone' => $request->get('phone')
+		],
+		[
+			'first_name'	=> $request->get('firstName'),
+			'last_name'		=> $request->get('lastName'),
+			'phone' 		=> $request->get('phone'),
+			'email' 		=> $request->get('email'),
+			'company' 		=> $request->get('company'),
+			'position' 		=> $request->get('position')
+		]);
+
+		if ($user->posts()->where('id', $request->get('eventId'))->first()) {
+			session()->push('messages', 'Вы уже подавали заявку на данное мероприятие. Ваши данные обновлены.');
+		}
+		elseif ($user->posts()->attach($request->get('eventId'))){
+			session()->push('messages', 'Ваша заявка принята, ответ будет предоставлен на указанный e-mail.');
+		}
+
+		return redirect($request->get('parentUrl', '/'));
+	}
+
     function postStudentRegister(Request $request){
     	$validationRules = [
     		'firstname' => 'required|max:191',
