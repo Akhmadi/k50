@@ -45,7 +45,19 @@
 						<label for="position" class="form__label label">Должность</label>
 						<input type="text" v-model="userSobytiyaRegister.position" name='position' id="position" placeholder="ДОЛЖНОСТЬ" required />
 					</div>
-				</div>					
+				</div>
+				<div class="row" v-show="userSobytiyaFound.isVisible">
+					<div class="form__field field_packages col-xs-12 mb-15-xs pt-15-xs">
+						<label for="packages" class="form__label label">Пакет участника</label>
+						<select name="packages" id="packages" placeholder="ПАКЕТ">
+						@foreach($post->postPackages->sortBy('order') as $postPackage)
+							<option id="{{ $postPackage->id }}" value="{{ $postPackage->desc }}" >Пакет "{{ $postPackage->title }}" стоимостью {{ $postPackage->amount }}</option>
+						@endforeach
+						</select> 
+						<div id="package_info" class="package__info mt-10-xs"></div>
+					</div>
+				</div>
+
 				<input type="hidden" name='parentUrl' value="{{ url()->current() }}" required />
 				<input type="hidden" name='eventId' value="{{ $post->id }}" required />
 			</fieldset>
@@ -56,4 +68,5 @@
 			</div>
 		</fieldset>			
 	</form>
+	
 </div>

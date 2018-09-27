@@ -20,7 +20,6 @@
         }
 
         $eventOpened = $post->sobytiyaRegisterOpened;
-        $regUsers = \App\RegEventUser::all();
 
         $eventPhotos = crud_image($post->eventPhotos, true);
         $eventPhotoCount = count($eventPhotos);

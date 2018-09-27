@@ -225,4 +225,21 @@ utils.onReady(()=>{
     };
 
 
+
+    let packageList = document.getElementById('packages');
+    let packageInfo = document.getElementById('package_info');
+
+    if (packageList){
+        packageList.selectedIndex = -1;
+        
+        packageList.onchange = function(){
+            if (packageInfo){
+                packageInfo.innerHTML = packageList.value;       
+            }
+        }
+    }
+
+
 });
+
+

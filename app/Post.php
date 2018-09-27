@@ -57,6 +57,10 @@ class Post extends Model
 		return $this->hasMany(TimeLine::class);
 	}
 
+	function postPackages(){
+		return $this->hasMany(PostPackage::class);
+	}
+
 	function presentations(){
 		return $this->hasMany(Presentation::class);
 	}
