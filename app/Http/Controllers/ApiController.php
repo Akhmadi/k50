@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\FeedbackQuestion;
 use App\Jobs\UserRegisteredNotifyJob;
+use App\Jobs\EventUserRegisterMailJob;
 use App\Mail\ApproveUser;
 use App\Mail\HelloUser;
 use App\Mail\RejectUser;
 use App\Mail\UserRegistered;
+use App\Mail\EventUserRegistered;
 use App\PagesService;
 use App\Post;
 use App\Subscriber;
@@ -92,7 +94,6 @@ class ApiController extends Controller
 			return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
 		}		
 
-
 		$user = RegEventUser::updateOrCreate([
 			'phone' => $request->get('phone')
 		],
@@ -112,6 +113,9 @@ class ApiController extends Controller
 			session()->push('messages', 'Ваша заявка принята, ответ будет предоставлен на указанный e-mail.');
 		}
 
+		$post = Post::where('id', $request->get('eventId'))->first();
+
+		EventUserRegisterMailJob::dispatch( $user, $post->title );
 		return redirect($request->get('parentUrl', '/'));
 	}
 
