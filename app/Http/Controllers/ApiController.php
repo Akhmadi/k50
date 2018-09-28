@@ -15,6 +15,7 @@ use App\Post;
 use App\Subscriber;
 use App\User;
 use App\RegEventUser;
+use App\PostPackage;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -94,6 +95,9 @@ class ApiController extends Controller
 			return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
 		}		
 
+		$post = Post::where('id', $request->get('eventId'))->first();
+		$package = PostPackage::where('id', $request->get('packages',''))->first();
+
 		$user = RegEventUser::updateOrCreate([
 			'phone' => $request->get('phone')
 		],
@@ -107,15 +111,13 @@ class ApiController extends Controller
 		]);
 
 		if ($user->posts()->where('id', $request->get('eventId'))->first()) {
-			session()->push('messages', 'Вы уже подавали заявку на данное мероприятие. Ваши данные обновлены.');
+			$user->posts()->detach($request->get('eventId'));
 		}
-		elseif ($user->posts()->attach($request->get('eventId'))){
-			session()->push('messages', 'Ваша заявка принята, ответ будет предоставлен на указанный e-mail.');
-		}
+		$user->posts()->attach($request->get('eventId'),['meta' => $package]);
+		session()->push('messages', 'Ваша заявка на участие принята.');
+		
 
-		$post = Post::where('id', $request->get('eventId'))->first();
-
-		EventUserRegisterMailJob::dispatch( $user, $post->title );
+		EventUserRegisterMailJob::dispatch( $user, $post->title, $package->title . " (" . $package->amount . ")" );
 		return redirect($request->get('parentUrl', '/'));
 	}
 

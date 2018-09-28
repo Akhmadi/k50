@@ -16,16 +16,18 @@ class EventUserRegisterMailJob implements ShouldQueue
 
     protected $eventUser;
     protected $eventName;
+    protected $eventPackage;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($eventUser, $eventName)
+    public function __construct($eventUser, $eventName, $eventPackage)
     {
         $this->eventUser = $eventUser;
         $this->eventName = $eventName;
+        $this->eventPackage = $eventPackage;
     }
 
     /**
@@ -36,7 +38,7 @@ class EventUserRegisterMailJob implements ShouldQueue
     public function handle()
     {
 
-        Mail::to(crud_settings('site.sobytiya_registration_email'))->send( new EventUserRegistered($this->eventUser, $this->eventName));
+        Mail::to(crud_settings('site.sobytiya_registration_email'))->send( new EventUserRegistered($this->eventUser, $this->eventName, $this->eventPackage));
 
     }
 }

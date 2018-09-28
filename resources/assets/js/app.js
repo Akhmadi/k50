@@ -234,7 +234,7 @@ utils.onReady(()=>{
         
         packageList.onchange = function(){
             if (packageInfo){
-                packageInfo.innerHTML = packageList.value;       
+                packageInfo.innerHTML = packageList.options[packageList.selectedIndex].getAttribute('data-description');
             }
         }
     }

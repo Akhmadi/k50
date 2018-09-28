@@ -14,6 +14,7 @@ class EventUserRegistered extends Mailable
 
     public $eventUser;
     public $eventName;
+    public $eventPackage;
 
     /**
      *
@@ -21,10 +22,11 @@ class EventUserRegistered extends Mailable
      *
      * @return void
      */
-    public function __construct($eventUser, $eventName)
+    public function __construct($eventUser, $eventName, $eventPackage)
     {
         $this->eventUser = $eventUser;
         $this->eventName = $eventName;
+        $this->eventPackage = $eventPackage;
     }
 
     /**

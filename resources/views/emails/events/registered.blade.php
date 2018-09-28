@@ -35,6 +35,7 @@
 					</tr>
 					<tr>
 						<td><b>Выбранный пакет</b></td>
+						<td>{{ $eventPackage }}</td>
 					</tr>
 				</table>
             </div>
