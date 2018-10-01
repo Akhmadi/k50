@@ -4,14 +4,18 @@ namespace App\Http\Controllers;
 
 use App\FeedbackQuestion;
 use App\Jobs\UserRegisteredNotifyJob;
+use App\Jobs\EventUserRegisterMailJob;
 use App\Mail\ApproveUser;
 use App\Mail\HelloUser;
 use App\Mail\RejectUser;
 use App\Mail\UserRegistered;
+use App\Mail\EventUserRegistered;
 use App\PagesService;
 use App\Post;
 use App\Subscriber;
 use App\User;
+use App\RegEventUser;
+use App\PostPackage;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -65,7 +69,57 @@ class ApiController extends Controller
 
             FeedbackQuestion::create($requestParams);
         }
-    }
+	}
+	
+	function postSobytiyaSearchPhone(Request $request){
+		$regEventUser = RegEventUser::where('phone', $request->get('searchPhone',''))->first();
+		return isset($regEventUser) ? $regEventUser : [];
+	}
+
+	function postSobytiyaRegister(Request $request){
+		$validationRules = [
+			'phone' => 'required',
+		    'lastName' => 'required|max:191',			
+			'firstName' => 'required|max:191',
+			'email' => 'required|email',
+		    'company' => 'required',
+			'position' => 'required',
+			'parentUrl' => 'required',
+			'eventId' => 'required'
+		];
+
+		$validator = Validator::make( $request->only(array_keys($validationRules)) , $validationRules);
+
+		if ($validator->fails()){
+            session()->push('messages', 'Необходимо заполнить все поля анкеты!');
+			return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
+		}		
+
+		$post = Post::where('id', $request->get('eventId'))->first();
+		$package = PostPackage::where('id', $request->get('packages',''))->first();
+
+		$user = RegEventUser::updateOrCreate([
+			'phone' => $request->get('phone')
+		],
+		[
+			'first_name'	=> $request->get('firstName'),
+			'last_name'		=> $request->get('lastName'),
+			'phone' 		=> $request->get('phone'),
+			'email' 		=> $request->get('email'),
+			'company' 		=> $request->get('company'),
+			'position' 		=> $request->get('position')
+		]);
+
+		if ($user->posts()->where('id', $request->get('eventId'))->first()) {
+			$user->posts()->detach($request->get('eventId'));
+		}
+		$user->posts()->attach($request->get('eventId'),['meta' => $package]);
+		session()->push('messages', 'Ваша заявка на участие принята.');
+		
+
+		EventUserRegisterMailJob::dispatch( $user, $post->title, $package->title . " (" . $package->amount . ")" );
+		return redirect($request->get('parentUrl', '/'));
+	}
 
     function postStudentRegister(Request $request){
     	$validationRules = [

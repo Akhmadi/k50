@@ -23,6 +23,8 @@
     "vue": "^2.5.7"
   },
   "dependencies": {
-    "masonry-layout": "^4.2.2"
+    "masonry-layout": "^4.2.2",
+    "npm": "^6.4.1",
+    "vue-the-mask": "^0.11.1"
   }
 }

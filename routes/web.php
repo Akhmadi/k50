@@ -24,6 +24,8 @@ Route::group(['as' => 'api.'], function(){
 	Route::get('/api/search/{text}/{take?}/{offset?}', ['as'=>'search', 'uses' => 'ApiController@getSearch']);
 	Route::get('/api/opcache/reset', ['as'=>'reset', 'uses' => 'ApiController@getOPcacheReset']);
 	Route::get('/api/students/', ['as'=>'students', 'uses' => 'ApiController@getStudents']);
+
+	Route::post('/api/search-by-phone/', ['as'=>'searchPhone', 'uses' => 'ApiController@postSobytiyaSearchPhone']);	
     Route::post('/api/subscribe/', ['as'=>'subscribe', 'uses' => 'ApiController@postSubscribe']);
     Route::post('/api/feedback/', ['as'=>'feedback', 'uses' => 'ApiController@postFeedback']);
 	Route::post('/api/students/approve', ['as'=>'students', 'uses' => 'ApiController@postStudentsApprove']);
@@ -37,6 +39,8 @@ Route::group(['as' => 'forms.'], function(){
 	Route::post('/students/login/', ['as'=>'students.login', 'uses' => 'ApiController@postStudentLogin']);
 	Route::post('/students/password/new', ['as'=>'students.password', 'uses' => 'ApiController@postStudentChangePassword']);
 	Route::post('/students/logout', ['as'=>'students.logout', 'uses' => 'ApiController@postStudentLogout']);
+
+	Route::post('/sobytiya/register/', ['as'=>'sobytiya.register', 'uses' => 'ApiController@postSobytiyaRegister']);
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

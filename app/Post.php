@@ -57,6 +57,10 @@ class Post extends Model
 		return $this->hasMany(TimeLine::class);
 	}
 
+	function postPackages(){
+		return $this->hasMany(PostPackage::class);
+	}
+
 	function presentations(){
 		return $this->hasMany(Presentation::class);
 	}
@@ -67,6 +71,11 @@ class Post extends Model
 
 	function students(){
 		return $this->belongsToMany(User::class, 'posts_users', 'post_id', 'user_id')->withPivot(['type', 'status'])->wherePivot('type', '=', 'student');
+	}
+
+	function registeredUsers(){
+		return $this->belongsToMany(RegEventUser::class, 'reg_event_link_data', 'post_id', 'user_id')
+					->withPivot(['meta']);
 	}
 
 	/********************************** scopes *******************************/
@@ -271,7 +280,31 @@ class Post extends Model
         } else {
             return false;
         }
-    }
+	}
+	
+	function getSobytiyaRegisterOpenedAttribute(){
+		$eventReg = $this->getMetaValue('event.registration');
+		$eventDate = new Carbon($this->getMetaValue('event.date'));
+		$dayBefore = $this->getMetaValue('event.days_before_start');
+		$maxUsers = $this->getMetaValue('event.max_memebrs_count');
+		$cntUsers = $this->registeredUsers()->count();
+		
+
+		if ($eventReg != 'ENABLED'){
+			return false;
+		} else {
+			if (Carbon::now()->lte($eventDate->subDays($dayBefore))){
+				if ($cntUsers < ($maxUsers)){
+					return true;
+				} else {
+					return false;
+				}				
+			} else {
+				return false;
+			}
+			
+		}
+	}
 
 	function getUrlAttribute(){
 		if (($this->postType->code != PostType::POST_TYPE_REVIEW) && ($this->postType->code != PostType::POST_TYPE_RESEARCH) && $this->slug){

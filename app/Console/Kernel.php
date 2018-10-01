@@ -5,6 +5,10 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Carbon\Carbon;
+use Excel;
+use App\Mail\EventUsersList;
 
 class Kernel extends ConsoleKernel
 {
@@ -65,7 +69,43 @@ class Kernel extends ConsoleKernel
 
 	    })->everyMinute()
 		  ->name('jobs_dispatch')
-	      ->withoutOverlapping();
+          ->withoutOverlapping();
+          
+        
+        $schedule->call(function(){
+           
+            $posts = \App\Post::where('post_type_id','7')->get();
+
+            foreach ($posts as $post){
+                $regStatus = $post->getMetaValue('event.registration');
+
+                if ($regStatus == 'ENABLED'){
+                    $eventDate = new Carbon($post->getMetaValue('event.date'));
+                    $dayBefore = $post->getMetaValue('event.days_before_start');
+                    $maxUsers = $post->getMetaValue('event.max_memebrs_count');
+                    $users = $post->registeredUsers()->get();
+
+                    if ((Carbon::now()->gte($eventDate->subDays($dayBefore))) || ($users->count() >= ($maxUsers))){
+                        $collection = collect([]);
+                        $fileName = str_replace(":","_",$post->title) . '.xlsx';                        
+
+                        foreach($users as $user){
+                            $packet = json_decode($user->pivot->meta);
+                            $collection->push([$post->title,$user->last_name,$user->first_name, $user->phone, $user->email, 
+                                $user->company, $user->position, $packet->title]);            
+                        }
+
+                        Excel::store(new \App\Exports\EventUserExport($collection), $fileName , 'excel'); //, \Maatwebsite\Excel\Excel::CSV
+                        Mail::to(crud_settings('site.sobytiya_registration_email'))
+                            ->send( new EventUsersList($post->title, $fileName));
+
+                        $post['meta->event->registration'] = 'DISABLED';
+                        $post->save();
+                      }
+                }
+            }
+
+        })->everyMinute();
 
     }
 

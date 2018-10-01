@@ -14,13 +14,12 @@
             $lat = $coords[0];
             $lng = $coords[1];
         }
-
-        if ($action == 'register'){
-            $eventFormScript = prepareFormScript($post->eventMemberForm, 'bform');
-        }
-        if ($action == 'registermedia'){
+        
+         if ($action == 'registermedia'){
             $eventFormScript = prepareFormScript($post->eventMediaForm, 'bform');
         }
+
+        $eventOpened = $post->sobytiyaRegisterOpened;
 
         $eventPhotos = crud_image($post->eventPhotos, true);
         $eventPhotoCount = count($eventPhotos);
@@ -89,11 +88,20 @@
                                     </ul>
                                 </div>
 
-                                @if($action == 'register' || $action == 'registermedia')
-                                    <div id="bform" class=""></div>
+                                @if($action == 'register')
+                                    <div class='row'>
+                                        @include('event_form_registration')
+                                    </div>                                    
+                                    
                                     <div class="ta-center-xs pad-20-xs">
                                         <a href="{{ url()->current() }}" class="btn is__red is__margined">Назад к событию</a>
                                     </div>
+                                @elseif($action == 'registermedia')
+                                    <div id="bform" class=""></div>                                    
+
+                                    <div class="ta-center-xs pad-20-xs">
+                                        <a href="{{ url()->current() }}" class="btn is__red is__margined">Назад к событию</a>
+                                    </div>                                    
                                 @else
 
                                     <div class="info row between-xs middle-xs">
@@ -102,8 +110,8 @@
                                             <p><b>Место: </b>{{ $post->eventPlace }}</p>
                                         </div>
                                         <div class="col-xs-12 col-md-4 center-xs end-md  pad-5-xs pad-0-md">
-                                            @if($post->eventRegistrationStatus == 'ENABLED')
-                                                <a href="{{ url()->current() .'?'. http_build_query(['action' => 'register']) }}" class="btn is__red is__margined">Стать участником</a>
+                                            @if($eventOpened)
+                                                <a href="{{ url()->current() .'?'. http_build_query(['action' => 'register']) }}" v-on:click="userSobytiyaFound=false" class="btn is__red is__margined">Стать участником</a>
                                             @else
                                                 <p>Регистрация закрыта</p>
                                             @endif
@@ -331,4 +339,5 @@
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAA6eTSNtTGtTOnvOIah6c4Eimcmqd9Znc&callback=initMap">
         </script>
     @endif
+
 @endsection
