@@ -105,7 +105,7 @@ class Kernel extends ConsoleKernel
                 }
             }
 
-        })->twiceDaily(8, 16);;
+        })->dailyAt('16:20')->timezone('Asia/Almaty');;
 
     }
 
