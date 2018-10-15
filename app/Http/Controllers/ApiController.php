@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 class ApiController extends Controller
 {
@@ -332,12 +333,23 @@ class ApiController extends Controller
 	}
 
 	function postStudentsReject(Request $request){
-
-		if ($student = $request->get('student', false)){
+		$params = $request->get('params', false);
+		
+		if ($student = $params['student']){
 			if ($user = User::where('email','=',$student['email'])->first()){
+			
+				if ($kpro = Post::kpro()->where('status', Post::POST_STATUS_ENABLED)->first()){
 
+                    DB::table('posts_users')
+                        ->where('user_id', $user->id)
+                        ->where('post_id', $kpro->id)
+                        ->update([ 'status' => 'rejected', 'textreject' => (isset($params['reason']) ? $params['reason'] : '')]); 
+				}
+								
 				Mail::to($user->email)->send( new RejectUser($user));
-				$user->delete();
+				// $user->delete();
+
+				
 			}
 		}
 

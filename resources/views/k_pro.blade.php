@@ -5,6 +5,7 @@
 
     $kpro = null;
     $kproOpened = false;
+    $noAvail = false;
 
     if ($guest){
 
@@ -19,7 +20,7 @@
         $qb = \App\Post::kpro();
 
         $kpros = $qb->whereHas('students', function($q) use ($user){
-            return $q->where('posts_users.user_id','=',$user->id);
+            return $q->where('posts_users.user_id','=',$user->id)->where('posts_users.status','=','enabled');
         })->get();
 
         if ($kpros->count()){
@@ -34,6 +35,9 @@
                     ->first();
             else
                 $kpro = $kpros->first();
+        }
+        else {
+            $noAvail = true;
         }
 
     }
@@ -80,6 +84,18 @@
                 <div class="quote">
                     <p class="quote__text quote__text_large">Внимание</p>
                     <p class="quote__text">Участники программы будут отбираться на конкурсной основе. Количество участников ограничено – {{ $kpro ? $kpro->kproMaxStudents : '0' }} человек.</p>
+                </div>
+            @elseif ($noAvail)
+                <div class="quote">
+                    <p class="quote__text">К сожалению, у Вас нет доступных программ K-Pro</p>
+                </div>
+                <div class="row col-xs-12 center-xs row  mb-20-xs mb-0-md">
+                    <form action="{{ route('forms.students.logout') }}" method="post">
+                        {{ csrf_field() }}
+                        <div class="control__group row">
+                            <input type="submit" class="col-xs-12 btn is__red is__rounded is__red_outlined" value="Выйти из личного кабинета">
+                        </div>
+                    </form>
                 </div>
             @else
                 @if($kpros->count() > 1)

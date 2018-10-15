@@ -70,7 +70,7 @@ class Post extends Model
 	}
 
 	function students(){
-		return $this->belongsToMany(User::class, 'posts_users', 'post_id', 'user_id')->withPivot(['type', 'status'])->wherePivot('type', '=', 'student');
+		return $this->belongsToMany(User::class, 'posts_users', 'post_id', 'user_id')->withPivot(['type', 'status', 'textreject'])->wherePivot('type', '=', 'student');
 	}
 
 	function registeredUsers(){

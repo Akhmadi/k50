@@ -67,18 +67,49 @@
                                             :disabled="loading"
                                             slot="activator"
                                             icon
-                                            @click="rejectStudent(student)"
+                                            @click="dialog = !dialog"
                                     >
                                         <v-icon color="error" >clear</v-icon>
                                     </v-btn>
                                     <span>Отказать</span>
-                                </v-tooltip>
-                            </v-card-actions>
+                                                                   
+                                    <v-dialog v-model="dialog" persistent max-width="590">
+                                        <v-card>
+                                        <v-card-title class="headline">Укажите причину отказа</v-card-title>
+                                        <v-card-text>
+                                            <v-flex xs12>
+                                            <v-select
+                                                :items="reasons"
+                                                v-model="selectedReason"
+                                                :menu-props="{ maxHeight: '400' }"
+                                                label="Выберите причину отказа"
+                                                persistent-hint
+                                                :search-input.sync="searchInput"
+                                            ></v-select>
+                                            <v-text-field
+                                                v-show="selectedReason=='Указать свою причину'"
+                                                v-model="ownReason"
+                                                label="Причина"
+                                                outline
+                                            ></v-text-field>
+                                            </v-flex>
+                                        </v-card-text>
+                                        <v-card-actions>
+                                            <v-spacer></v-spacer>
+                                            <v-btn flat @click.native="dialog = false">Отмена</v-btn>
+                                            <v-btn :disabled=isSelected flat color="error" @click.native="rejectStudent(student)">Отказать</v-btn>
+                                        </v-card-actions>
+                                        </v-card>
+                                    </v-dialog>
+                                </v-tooltip> 
+                            </v-card-actions>                            
                         </v-card>
                     </v-flex>
 
                 </v-flex>
             </div>
+
+
         </v-flex>
 
 
@@ -92,10 +123,22 @@
         data: function () {
             return {
                 program: null,
-                loading: false
+                loading: false,
+                dialog: false,
+                selectedReason: [],
+                reasons: [
+                    'Отказ студенту по возрасту', 
+                    'Студент отказался в участии перед стартом проекта',
+                    'Студент отказался в участии во время проекта', 
+                    'Указать свою причину'],
+                ownReason: ""
             }
         },
-        computed: {},
+        computed: {
+            isSelected(){
+                return (this.selectedReason.length>0) ? ((this.selectedReason=='Указать свою причину' && this.ownReason.length == 0) ? true : false) : true;
+            }
+        },
         methods: {
             removeStudent(student){
                 this.program.students = _.filter(this.program.students, (s)=>s.id !== student.id);
@@ -114,9 +157,11 @@
             },
             rejectStudent(student){
                 this.loading = true;
-                axios.post(App.baseUrl + '/api/students/reject', {student: student}).then(()=>{
-                    AdminManager.showSuccess(`Студент ${student.name} удален`);
+                var rejectReason = (this.selectedReason=='Указать свою причину') ? this.ownReason : this.selectedReason;
+                axios.post(App.baseUrl + '/api/students/reject', {params: {student: student, reason: rejectReason} } ).then(()=>{
+                    AdminManager.showSuccess(`Студенту ${student.name} отказано в участии`);
                     this.removeStudent(student);
+                    this.dialog = false;
                     this.loading = false;
                 }).catch((err)=>{
                     AdminManager.showError('Ошибка действия');
