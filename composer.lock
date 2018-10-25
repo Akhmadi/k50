@@ -3713,16 +3713,16 @@
         },
         {
             "name": "vshapovalov/crud",
-            "version": "1.4.6",
+            "version": "1.4.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vshapovalov/laravel-crud.git",
-                "reference": "9dddc6c390775eda6a18de5a3342480c4f3d5c93"
+                "reference": "e5a69bf6665b430d36bb92e6be569d456c3d4657"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vshapovalov/laravel-crud/zipball/9dddc6c390775eda6a18de5a3342480c4f3d5c93",
-                "reference": "9dddc6c390775eda6a18de5a3342480c4f3d5c93",
+                "url": "https://api.github.com/repos/vshapovalov/laravel-crud/zipball/e5a69bf6665b430d36bb92e6be569d456c3d4657",
+                "reference": "e5a69bf6665b430d36bb92e6be569d456c3d4657",
                 "shasum": ""
             },
             "require": {
@@ -3758,7 +3758,7 @@
                 "crud",
                 "laravel"
             ],
-            "time": "2018-09-15T12:05:52+00:00"
+            "time": "2018-10-25T10:52:01+00:00"
         }
     ],
     "packages-dev": [
