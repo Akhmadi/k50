@@ -20,7 +20,7 @@
                 <div class="block block__3">
 
                 <div class="block__header row between-xs bottom-xs">
-                    <p class="title">Категории рейтингов</p>
+                    <p class="title">Номинации</p>
                 </div>
                 @foreach ($postCats->chunk(3) as $chunk)
                     <div class="row block__content">
