@@ -80,9 +80,9 @@
 
                                     <div class="col-xs-12 col-md-12 ">
                                         <div class="row between-xs mb-10-xs">
-                                            <p class="fw-300-xs fs-12-xs color-black">{{ mb_strtoupper($item->position) }}</p>
+                                            <p class="fw-300-xs fs-12-xs">{{ mb_strtoupper($item->position) }}</p>
                                         </div>
-                                        <div class="ta-justify-xs ta-left-md fs-12-xs color-black"><img src="{{ url($item->image) }}" alt="{{ $item->name }}" class="hidden-md fl-left-xs w-30-xs mr-10-xs">{!! $item->info !!}</div>
+                                        <div class="ta-justify-xs ta-left-md fs-12-xs clampMe"><img src="{{ url($item->image) }}" alt="{{ $item->name }}" class="hidden-md fl-left-xs w-30-xs mr-10-xs">{!! $item->info !!}</div>
                                     </div>
                                 </div>
                             </div>
