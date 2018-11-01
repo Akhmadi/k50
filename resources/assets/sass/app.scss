@@ -1395,7 +1395,8 @@ textarea.form__control{
         // right: 0;
         // top: 0;
         // transform: translateX(100%);
-        transform: scaleY(0);
+        // transform: scaleY(0);
+        display: none;
         color: white;
         z-index: 2;
       }
@@ -1404,7 +1405,8 @@ textarea.form__control{
         .bio{
           // background: rgba(0,0,0, 0.6);
           // transform: translateX(0);
-          transform: scaleY(1);
+          // transform: scaleY(1);
+          display: inline;
           color: black;
           position: relative;
         }
@@ -1412,12 +1414,50 @@ textarea.form__control{
         .frame-border{
           height: auto;
         }
+
+        .clampMe{
+          display: none;
+        }
       }
 
       .frame-border{
-        border: 1px solid $color-gray-border;
+        // border: 1px solid $color-gray-border;
         height: 160px;
       }
+
+      .clampMe {
+        position: relative;
+        height: 3.4em; 
+        overflow: hidden;
+      }
+      
+      .clampMe:after {
+        content: "";
+        text-align: right;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 50%;
+        height: 1.2em;
+        background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 80%);
+      }
+      
+      /* Now add in code for the browsers that support -webkit-line-clamp and overwrite the non-supportive stuff */
+      @supports (-webkit-line-clamp: 2) {
+        .clampMe {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+        
+        .clampMe:after {
+          display: none;
+        }
+      }
+
+
     }
   }
 

@@ -192,9 +192,10 @@
                                                                         <div class="col-md-6 pos-relative-xs h-150px-xs center-xs mt-10-xs mt-5-sm mb-5-sm ">
                                                                             <img src="{{ $speaker->image ? url($speaker->image) : '' }}" alt="{{ $speaker->name }}" class="img-by-h-xs pos-absolute-xs">
                                                                         </div>    
-                                                                        <div class="col-md-6 info mt-5-sm">
+                                                                        <div class="col-md-6 mt-5-sm">
                                                                             <p class="fw-700-xs fs-12-xs color-black">{{ $speaker->name}}</p>
                                                                             <p class="fw-300-xs fs-12-xs color-black mt-20-xs">{{ $speaker->position}}</p>
+                                                                            <p class="fs-12-xs mt-10-xs color-black clampMe">{{ $speaker->info}}</p>
                                                                         </div>
                                                                         <div class="bio col-xs-12">
                                                                             <p class=" fs-12-xs pad-5-xs ">{{ $speaker->info}}</p>
