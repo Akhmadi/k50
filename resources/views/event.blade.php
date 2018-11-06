@@ -153,7 +153,7 @@
                                                         <div class="plan-col-3">План</div>
                                                     </div>
                                                     <div class="program__plan_body">
-                                                        @foreach($post->timeLines as $timeLine)
+                                                        @foreach($post->timeLines->sortBy('planned_time') as $timeLine)
                                                             <div class="plan__row">
                                                                 <div class="plan-col-1">{{ $timeLine->planned_time }}</div>
                                                                 <div class="plan-col-2">
