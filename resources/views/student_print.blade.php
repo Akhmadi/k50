@@ -3,7 +3,7 @@
     if ($studentId = $params['id']['value']){
 
         $user = \App\User::where('id', $studentId)->where('type', 'student')->first();
-
+        $files = json_decode($user->getMetaValue('files'), true);
     }
 @endphp
 
@@ -52,6 +52,19 @@
         <p>{{ $user->getMetaValue('f8') }}</p>
         <p><b>У Вас есть достижения в спорте, творчестве и других сферах жизни?</b></p>
         <p>{{ $user->getMetaValue('f9') }}</p>
+        <br>
+
+        @if ($files)
+        <p><b>Прикрепленные файла студента:</b></p>
+        <ul>
+            @foreach ($files as $file)
+             <li><a href="{{ url( $file ) }}" target="blank">{{ str_replace('/storage/uploads/Анкеты студентов/', '', $file) }}</a></li>
+            @endforeach
+        </ul>
+        @else
+        <p><b>Студент не прикрепил файлы к анкете!</b></p>
+        @endif
+
     @else
         <p>Анкета не найдена</p>
     @endif

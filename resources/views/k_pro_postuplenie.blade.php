@@ -33,19 +33,22 @@
                 </div>
                 @if($guest)
                     <div class="row col-xs-12 center-xs title_actions row  mb-20-xs mb-0-md">
-                        <a href="{{ \App\PagesService::pageRoute('kpro_login') }}"
-                           class="btn is__red width_240px is__rounded" >Войти</a>
+                        <div>
+                            <a href="{{ \App\PagesService::pageRoute('kpro_login') }}"
+                            class="btn is__red width_240px is__rounded" >Войти</a>
+                        </div>
+                        @if($kproOpened)
+                        <div>
+                            <a href="{{ \App\PagesService::pageRoute('kpro_register') }}"
+                            class="btn is__red width_240px is__rounded ml-30-md">Подать заявку</a>
+                        </div>
+                        @endif
                     </div>
                 @endif
             </div>
         </div>
 
-        @if($kproOpened)
-        <div class="row col-xs-12 center-xs mb-20-xs mb-0-md mt-10-xs">
-            <a href="{{ \App\PagesService::pageRoute('kpro_register') }}"
-            class="btn is__red width_400px is__rounded ml-30-md">Подать заявку</a>
-        </div>
-        @endif
+        
 
         <div class="container">
             <div class="block_content">
