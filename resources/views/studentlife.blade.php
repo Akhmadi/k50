@@ -45,7 +45,6 @@
                     </div>
                     <div class="col-xs-12 col-md row center-xs end-md mt-20-xs mt-0-md">
                         <div class="kpro_steps row between-xs pl-5-xs pl-0-md pr-5-xs pr-0-md">
-                            <span class="kpro_steps__item"><a class="link" href="{{ page_route('k_pro_postuplenie') }}">поступление</a></span>
                             <span class="kpro_steps__item"><a class="link" href="{{ page_route('studentlife') }}">student life</a></span>
                             <span class="kpro_steps__item">обучение</span>
                         </div>
@@ -54,8 +53,16 @@
                 </div>
                 @if($guest)
                     <div class="row col-xs-12 center-xs title_actions row  mb-20-xs mb-0-md">
-                        <a href="{{ \App\PagesService::pageRoute('kpro_login') }}"
-                           class="btn is__red width_240px is__rounded" >Войти</a>
+                        <div>
+                            <a href="{{ \App\PagesService::pageRoute('kpro_login') }}"
+                            class="btn is__red width_240px is__rounded mb-20-xs" >Войти</a>
+                        </div>
+                        @if($kproOpened)
+                        <div>
+                            <a href="{{ page_route('k_pro_postuplenie') }}"
+                            class="btn is__red width_240px is__rounded ml-30-md">Поступление</a>
+                        </div>
+                        @endif
                     </div>
                 @endif
             </div>

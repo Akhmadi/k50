@@ -18,7 +18,6 @@
                     </div>
                     <div class="col-xs-12 col-md row center-xs end-md mt-20-xs mt-0-md">
                         <div class="kpro_steps row between-xs pl-5-xs pl-0-md pr-5-xs pr-0-md">
-                            <span class="kpro_steps__item"><a class="link" href="{{ page_route('k_pro_postuplenie') }}">поступление</a></span>
                             <span class="kpro_steps__item"><a class="link" href="{{ page_route('studentlife') }}">student life</a></span>
                             <span class="kpro_steps__item">обучение</span>
                         </div>

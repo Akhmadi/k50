@@ -24,7 +24,6 @@
                     </div>
                     <div class="col-xs-12 col-md row center-xs end-md mt-20-xs mt-0-md">
                         <div class="kpro_steps row between-xs pl-5-xs pl-0-md pr-5-xs pr-0-md">
-                            <span class="kpro_steps__item"><a class="link" href="{{ page_route('k_pro_postuplenie') }}">поступление</a></span>
                             <span class="kpro_steps__item"><a class="link" href="{{ page_route('studentlife') }}">student life</a></span>
                             <span class="kpro_steps__item">обучение</span>
                         </div>
@@ -37,12 +36,6 @@
                             <a href="{{ \App\PagesService::pageRoute('kpro_login') }}"
                             class="btn is__red width_240px is__rounded" >Войти</a>
                         </div>
-                        @if($kproOpened)
-                        <div>
-                            <a href="{{ \App\PagesService::pageRoute('kpro_register') }}"
-                            class="btn is__red width_240px is__rounded ml-30-md">Подать заявку</a>
-                        </div>
-                        @endif
                     </div>
                 @endif
             </div>
@@ -51,11 +44,17 @@
         
 
         <div class="container">
+            @if($kproOpened)
+                <div class="row center-xs">
+                    <a href="{{ \App\PagesService::pageRoute('kpro_register') }}"
+                       class="btn is__red_outlined width_240px is__rounded ml-30-md">Подать заявку</a>
+                </div>
+            @endif             
             <div class="block_content">
                 <div class="base__content margined__bottom pad-5-xs pad-0-md">
                     {!! $page->body !!}
                 </div>
-            </div>
+            </div>           
         </div>
     </div>
 

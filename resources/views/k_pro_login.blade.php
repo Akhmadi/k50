@@ -3,6 +3,12 @@
 @php
     if (\Illuminate\Support\Facades\Auth::check())
         redirect_now(url(\App\PagesService::pageRoute('kpro')));
+
+    $kpro = null;
+    $kproOpened = false;
+
+    if ($kpro = \App\Post::kpro()->where('status', \App\Post::POST_STATUS_ENABLED)->first())
+            $kproOpened = $kpro->kproRegisterOpened;    
 @endphp
 
 @section('page_content')
@@ -16,13 +22,19 @@
                     </div>
                     <div class="col-xs-12 col-md row center-xs end-md mt-20-xs mt-0-md">
                         <div class="kpro_steps row between-xs pl-5-xs pl-0-md pr-5-xs pr-0-md">
-                            <span class="kpro_steps__item"><a class="link" href="{{ page_route('k_pro_postuplenie') }}">поступление</a></span>
                             <span class="kpro_steps__item"><a class="link" href="{{ page_route('studentlife') }}">student life</a></span>
                             <span class="kpro_steps__item">обучение</span>
                         </div>
                     </div>
-
                 </div>
+                @if($kproOpened)
+                    <div class="row col-xs-12 center-xs title_actions row  mb-20-xs mb-0-md">
+                        <div>
+                            <a href="{{ page_route('k_pro_postuplenie') }}"
+                            class="btn is__red width_240px is__rounded ml-30-md">Поступление</a>
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
 
